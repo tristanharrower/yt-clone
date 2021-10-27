@@ -32,8 +32,11 @@ const CategoriesBar = () => {
    const dispatch = useDispatch()
    const handleClick = value => {
       setActiveElement(value)
-     dispatch(getVideosByCategory(value))
-
+      if (value === 'All') {
+         dispatch(getPopularVideos())
+      } else {
+         dispatch(getVideosByCategory(value))
+      }
    }
 
    return (
