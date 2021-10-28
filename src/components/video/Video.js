@@ -80,7 +80,7 @@ const Video = ({ video }) => {
             <div className="video_top">
                {/*<img src={medium.url} alt=""/>*/} 
                 <LazyLoadImage src={medium.url} effect='blur' />
-                <span>{_duration}</span>
+                <span className="video_top_duration">{_duration}</span>
             </div>
             <div className="video_title">
             {title}
