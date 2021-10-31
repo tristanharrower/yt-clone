@@ -28,7 +28,6 @@ const HomeScreen = () => {
     }
  }
 
-
     return (
         <Container >
             <CategoriesBar/>
@@ -42,8 +41,8 @@ const HomeScreen = () => {
             }
             className='row'>
             {!loading ? videos.map((video) => (
-                        <Col key={video.id} lg={3} md={4}>
-                            <Video video={video}  key={video.id} />
+                        <Col lg={3} md={4}>
+                            <Video video={video} key={video.id}/>
                         </Col>
                     ))
                 : [...Array(20)].map(() => (

@@ -14,14 +14,14 @@ const Comments = () => {
                  alt=""
                  className="rounded-cirlce mr-3"
                  />
-                 <form onSubmit={handleComment} classname="d-flex flex-grow-1">
+                 <form onSubmit={handleComment} className="d-flex flex-grow-1">
                     <input type="text" className="flex-grow-1"
                     placeholder="Write a comment..."
                     />
                     <button className="border-0 p-2">Comment</button>
                  </form>
             </div>
-            <div classname="comments_list">
+            <div className="comments_list">
                 {
                     [...Array(15)].map(()=><Comment/>)
                 }
