@@ -11,6 +11,7 @@ const Comment = ({comment}) => {
         textDisplay,
      } = comment
 
+     
      return (
       <div className='p-2 comment d-flex'>
          <img

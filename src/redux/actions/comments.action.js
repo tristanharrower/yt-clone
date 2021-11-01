@@ -1,5 +1,5 @@
 import request from '../../api'
-import { COMMENT_LIST_FAIL, COMMENT_LIST_REQUEST, COMMENT_LIST_SUCCESS } from "../actionType";
+import { COMMENT_LIST_FAIL, COMMENT_LIST_REQUEST, COMMENT_LIST_SUCCESS,  CREATE_COMMENT_SUCCESS, CREATE_COMMENT_FAIL } from "../actionType";
 
 export const getCommentsById = (id) => async dispatch => {
     try{
@@ -12,7 +12,7 @@ export const getCommentsById = (id) => async dispatch => {
              videoId:id
           }
        })
-       console.log(data)
+       
        dispatch({
           type:COMMENT_LIST_SUCCESS,
           payload:data.items,
@@ -21,6 +21,44 @@ export const getCommentsById = (id) => async dispatch => {
          console.log(error.message);
          dispatch({
             type:COMMENT_LIST_FAIL,
+            payload:error.response.data.message
+         })
+    }
+ }
+ export const addComment = (id, text) => async (dispatch,  getState) => {
+    try{
+
+        const obj = {
+            snippet:  {
+                videoId:id,
+                topLevelComment:{
+                    snippet:{
+                        textOriginal: text,
+                    },
+                },
+            },
+        }
+
+        await request.post('/commentThreads',obj,{
+          params:{
+             part:'snippet',
+          },
+          headers:{
+            Authorization:`Bearer ${getState().auth.accessToken}`
+         },
+       })
+       
+       dispatch({
+          type:CREATE_COMMENT_SUCCESS,
+       })
+
+       setTimeout(()=> dispatch(getCommentsById(id)), 3000)
+        
+      
+    }  catch(error){
+         console.log(error.message);
+         dispatch({
+            type:CREATE_COMMENT_FAIL,
             payload:error.response.data.message
          })
     }
