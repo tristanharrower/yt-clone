@@ -24,7 +24,6 @@ const VideoMetaData = ({ video: { snippet,statistics }, videoId }) => {
 
     const {snippet:channelSnippet, statistics:channelStatistics} = useSelector(state=>state.channelDetails.channel)
 
-    console.log(subscriptionStatus);
 
     return (
         <div className="videoMetaData py-2">

@@ -2,23 +2,30 @@ import React from 'react'
 import moment from 'moment'
 import  './_comment.scss'
 
-const Comment = () => {
-    return (
-        <div className="comment p-2 d-flex">
-            <img src='https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png'
-                 alt=""
-                 className="rounded-cirlce mr-3"
-            />
-            <div className="comment_body">
-                <p className="comment_header">
-                tristan harrower • {moment('2021-06-07').fromNow()}
-                </p>
-                <p>
-                    Comments go here
-                </p>
-            </div>
-        </div>
-    )
+const Comment = ({comment}) => {
+
+    const {
+        authorDisplayName,
+        authorProfileImageUrl,
+        publishedAt,
+        textDisplay,
+     } = comment
+
+     return (
+      <div className='p-2 comment d-flex'>
+         <img
+            src={authorProfileImageUrl}
+            alt=''
+            className='mr-3 rounded-circle'
+         />
+         <div className='comment__body'>
+            <p className='mb-1 comment__header'>
+               {authorDisplayName} • {moment(publishedAt).fromNow()}
+            </p>
+            <p className='mb-0'>{textDisplay}</p>
+         </div>
+      </div>
+   )
 }
 
 export default Comment
