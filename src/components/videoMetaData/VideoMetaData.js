@@ -5,7 +5,7 @@ import numeral from 'numeral'
 import {MdThumbUp,MdThumbDown} from 'react-icons/md'
 import ShowMoreText from 'react-show-more-text'
 import { useDispatch, useSelector } from 'react-redux'
-import { getChannelDetails } from '../../redux/actions/channel.action'
+import { checkSubscriptionStatus, getChannelDetails } from '../../redux/actions/channel.action'
 import { useEffect } from 'react'
 
 const VideoMetaData = ({ video: { snippet,statistics }, videoId }) => {
@@ -17,9 +17,14 @@ const VideoMetaData = ({ video: { snippet,statistics }, videoId }) => {
 
     useEffect(() => {
         dispatch(getChannelDetails(channelId))
+        dispatch(checkSubscriptionStatus(channelId))
     }, [dispatch, channelId])
 
+    const subscriptionStatus = useSelector(state=>state.channelDetails.subscriptionStatus)
+
     const {snippet:channelSnippet, statistics:channelStatistics} = useSelector(state=>state.channelDetails.channel)
+
+    console.log(subscriptionStatus);
 
     return (
         <div className="videoMetaData py-2">
@@ -51,7 +56,9 @@ const VideoMetaData = ({ video: { snippet,statistics }, videoId }) => {
                         <span>{numeral(channelStatistics?.subscriberCount).format('0.a')} Subscribers</span>
                     </div>
                 </div>
-                <button className="btn border-0 p-2 m-2">Subscribe</button>
+                <button className={`btn border-0 p-2 m-2 ${subscriptionStatus ? 'btn-gray':''}`}>
+                    {subscriptionStatus ? 'Subscribed' : 'Subscribe'}
+                </button>
             </div>
             <div className="videoMetaData_description">
               
