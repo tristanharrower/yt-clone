@@ -3,10 +3,17 @@ import "./_header.scss"
 import { FaBars } from "react-icons/fa"
 import { AiOutlineSearch } from "react-icons/ai"
 import { MdNotifications, MdApps } from "react-icons/md"
+import { useHistory } from 'react-router'
 
 
 const Header = ({ handleToggleSidebar}) => {
 
+
+    const history = useHistory()
+
+    const handleClick = () => {
+        history.push('/')
+    }
 
 
     return (
@@ -19,6 +26,7 @@ const Header = ({ handleToggleSidebar}) => {
             src="https://pngimg.com/uploads/youtube/youtube_PNG2.png"
             alt=""
             className="header_logo"
+            onClick={handleClick}
             />
 
             <form>

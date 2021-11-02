@@ -10,6 +10,7 @@ import { Col, Row } from 'react-bootstrap'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import request from '../../api';
+import { useHistory } from 'react-router';
 
 const VideoVertical = ({ video }) => {
     const seconds = moment.duration('100').asSeconds()
@@ -69,9 +70,16 @@ const VideoVertical = ({ video }) => {
 
         get_channel_icon()
     }, [channelId])
+    
+
+    const history = useHistory()
+    const handleClick = () => {
+        history.push(`/watch/${id.videoId}`)
+    }
+
     return (
-        <Row className="videoHorizontal m-1 p py-2 align-items-center">
-            <Col xs={6} md={4}
+        <Row className="videoHorizontal m-1 p py-2 align-items-center" onClick={handleClick}>
+            <Col xs={6} md={6}
             className="videoHorizontal_left"
             >
                  <LazyLoadImage src={medium.url}
@@ -79,9 +87,9 @@ const VideoVertical = ({ video }) => {
                   className="videoHorizontal_thumbnail"
                   wrapperClassName="videoHorizontal_thumbnail-wrapper"
                   />
-                <span className="video_top_duration">{duration}</span>
+                <span className="videoHorizontal_duration">{duration}</span>
             </Col>
-            <Col xs={6} md={8}
+            <Col xs={6} md={6}
             className="videoHorizontal_right p-0"
             >
                 <p className="videoHorizontal-title mb-1">
@@ -95,7 +103,7 @@ const VideoVertical = ({ video }) => {
                 {/*<LazyLoadImage src='https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png'
                   effect='blur' 
                   />*/}
-                  <p>{channelTitle}</p>
+                  <p className="mb-0">{channelTitle}</p>
                 </div>
             </Col>
         </Row>
