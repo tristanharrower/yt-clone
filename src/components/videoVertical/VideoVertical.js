@@ -7,38 +7,95 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import moment from 'moment'
 import numeral from 'numeral'
 import { Col, Row } from 'react-bootstrap'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import request from '../../api';
 
-const VideoVertical = () => {
+const VideoVertical = ({ video }) => {
     const seconds = moment.duration('100').asSeconds()
     const _duration = moment.utc(seconds * 1000).format('mm:ss')
 
+    const [views, setViews] = useState(null)
+    const [duration, setDuration] = useState(null)
+    const [channelIcon, setChannelIcon] = useState(null)
+
+    const {
+        id,
+        snippet: {
+           channelId,
+           channelTitle,
+           description,
+           title,
+           publishedAt,
+           thumbnails: { medium },
+        },
+     } = video
+
+     
+    useEffect(() => {
+
+        const get_video_details = async () => {
+
+            const {
+                data:{ items },
+            } = await request('/videos', {
+                params:{
+                    part:'contentDetails,statistics',
+                    id:id.videoId,
+                }
+            })
+            setDuration(items[0].contentDetails.duration)
+            setViews(items[0].statistics.viewCount)
+            
+        }
+
+        get_video_details()
+    }, [id])
+
+    useEffect(() => {
+
+        const get_channel_icon = async () => {
+
+            const {
+                data:{ items },
+            } = await request('/channels', {
+                params:{
+                    part:'snippet',
+                    id:channelId,
+                }
+            })
+            setChannelIcon(items[0].snippet.thumbnails.default)
+        }
+
+        get_channel_icon()
+    }, [channelId])
     return (
         <Row className="videoHorizontal m-1 p py-2 align-items-center">
             <Col xs={6} md={4}
             className="videoHorizontal_left"
             >
-                 <LazyLoadImage src='https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png'
+                 <LazyLoadImage src={medium.url}
                   effect='blur' 
                   className="videoHorizontal_thumbnail"
                   wrapperClassName="videoHorizontal_thumbnail-wrapper"
                   />
-                <span className="video_top_duration">{_duration}</span>
+                <span className="video_top_duration">{duration}</span>
             </Col>
             <Col xs={6} md={8}
             className="videoHorizontal_right p-0"
             >
                 <p className="videoHorizontal-title mb-1">
-                        catchy title
+                        {title}
                 </p>
                 <div className="videoHorizontal_details">
-                    <AiFillEye/> {numeral(4300).format('0.a')} Views • 
-                    {moment('2021-08-07').fromNow()}
+                    <AiFillEye/> {numeral(views).format('0.a')} Views • 
+                    {moment(publishedAt).fromNow()}
                 </div>
                 <div className="videoHorizontal_channel d-flex align-items-center my-1">
                 {/*<LazyLoadImage src='https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png'
                   effect='blur' 
                   />*/}
-                  <p>ChannelName</p>
+                  <p>{channelTitle}</p>
                 </div>
             </Col>
         </Row>

@@ -5,7 +5,7 @@ import VideoMetaData from '../../components/videoMetaData/VideoMetaData'
 import VideoVertical from '../../components/videoVertical/VideoVertical'
 import Comments from  '../../components/comments/Comments'
 import { useParams } from 'react-router'
-import { getVideoById } from '../../redux/actions/videos.action'
+import { getRelatedVideos, getVideoById } from '../../redux/actions/videos.action'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
@@ -18,9 +18,12 @@ const WatchScreen = () => {
 
  useEffect(()   => {
     dispatch(getVideoById(id))
+
+    dispatch(getRelatedVideos(id));
  }, [dispatch,id])
 
  const {video, loading} = useSelector(state => state.selectedVideo)
+ const {videos, loading:relatedVideosLoading} = useSelector(state => state.relatedVideos)
 
     return (
         <Row>
@@ -45,8 +48,9 @@ const WatchScreen = () => {
 
             </Col>
             <Col lg={4}>
-                {
-                    [...Array(10)].map(()=><VideoVertical/>)
+                {!loading &&  
+                videos?.filter(video=>video.snippet)
+                .map((video)=><VideoVertical video={video} key={video.id.videoId}/>)
                 }
             </Col>
         </Row>
