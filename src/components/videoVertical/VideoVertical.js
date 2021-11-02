@@ -2,7 +2,6 @@ import React from 'react'
 import './_videoVertical.scss'
 
 import {AiFillEye} from 'react-icons/ai'
-import request from '../../api'
 
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import moment from 'moment'

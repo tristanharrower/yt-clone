@@ -6,7 +6,6 @@ import {
     MdExitToApp,
     MdThumbUp,
     MdHistory,
-    MdLibraryBooks,
     MdHome,
     MdSentimentDissatisfied,
 } from "react-icons/md"

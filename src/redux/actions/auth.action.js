@@ -2,7 +2,7 @@ import firebase from 'firebase/compat/app'
 
 import auth from '../../firebase'
 
-import { LOAD_PROFILE, LOGIN_FAIL, LOGIN_OUT, LOGIN_REQUEST, LOGIN_SUCCESS, LOG_OUT } from '../actionType'
+import { LOAD_PROFILE, LOGIN_FAIL, LOGIN_OUT, LOGIN_REQUEST, LOGIN_SUCCESS, } from '../actionType'
 
 
 
