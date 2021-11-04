@@ -44,9 +44,6 @@ export const getChannelDetails = (id) => async dispatch => {
       })
       
    }  catch(error){
-        console.log(error.message);
-        dispatch({
-           payload:error.response.message
-        })
+        console.log(error.response.data);
    }
 }
