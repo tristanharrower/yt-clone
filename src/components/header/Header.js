@@ -12,6 +12,7 @@ const Header = ({ handleToggleSidebar}) => {
     const history = useHistory('')
 
     const handleClick = () => {
+        
         history.push('/')
     }
 

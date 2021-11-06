@@ -56,6 +56,11 @@ const Video = ({ video }) => {
         }
 
         get_video_details()
+
+        return () => {
+            setDuration({})
+            setViews({})
+        }
     }, [_videoId])
 
     

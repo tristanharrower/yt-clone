@@ -41,7 +41,7 @@ const App = () => {
         if(!loading && !accessToken){
             history.push('/auth')
         }
-    },[accessToken, loading])
+    },[accessToken, loading, history])
 
 
     return  (
