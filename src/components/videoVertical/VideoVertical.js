@@ -55,6 +55,7 @@ const VideoVertical = ({ video, searchScreen, subScreen }) => {
     if(isVideo){
         get_video_details()
     }
+
         
     }, [id, isVideo])
 
@@ -74,6 +75,10 @@ const VideoVertical = ({ video, searchScreen, subScreen }) => {
         }
 
         get_channel_icon()
+
+        return () => {
+            setChannelIcon({});
+          };
     }, [channelId])
 
     const thumbnail = !isVideo && 'videoHorizontal_thumbnail-channel'

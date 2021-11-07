@@ -7,7 +7,7 @@ import { useHistory } from 'react-router'
 
 
 const Header = ({ handleToggleSidebar}) => {
-    const [input, setInput] = useState()
+    const [input, setInput] = useState('')
 
     const history = useHistory('')
 
