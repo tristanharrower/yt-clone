@@ -1,4 +1,4 @@
-import { HOME_VIDEOS_FAIL,
+import { CHANNEL_VIDEOS_FAIL, CHANNEL_VIDEOS_REQUEST, CHANNEL_VIDEOS_SUCCESS, HOME_VIDEOS_FAIL,
         HOME_VIDEOS_REQUEST,
          HOME_VIDEOS_SUCCESS,
          RELATED_VIDEO_FAIL,
@@ -159,6 +159,35 @@ export const subscriptionsChannelReducer = (state={
                 loading:false
             }
             case SUBSCRIPTIONS_CHANNEL_FAIL:
+                return{
+                    ...state,
+                    loading:false,
+                    error:payload
+                }
+        default:
+            return state
+    }
+}
+
+export const channelVideosReducer = (state={
+    loading:null,
+    videos:[],
+}, action) => {
+    const {payload,type} = action;
+
+    switch(type){
+        case CHANNEL_VIDEOS_REQUEST:
+        return{
+            ...state,
+            loading:true
+        }
+        case CHANNEL_VIDEOS_SUCCESS:
+            return{
+                ...state,
+                videos:payload,
+                loading:false
+            }
+            case CHANNEL_VIDEOS_FAIL:
                 return{
                     ...state,
                     loading:false,

@@ -1,4 +1,7 @@
 import {
+   CHANNEL_VIDEOS_FAIL,
+   CHANNEL_VIDEOS_REQUEST,
+    CHANNEL_VIDEOS_SUCCESS,
     HOME_VIDEOS_FAIL,
     HOME_VIDEOS_REQUEST,
     HOME_VIDEOS_SUCCESS,
@@ -155,6 +158,43 @@ export const getVideosBySearch = keyword => async (dispatch) => {
       dispatch({
          type: SEARCH_VIDEO_FAIL,
          payload: error.message,
+      })
+   }
+}
+
+export const getVideosByChannel = (id) => async (dispatch) => {
+   try {
+      dispatch({
+         type: CHANNEL_VIDEOS_REQUEST,
+      })
+      //Get upload playlist id
+      const { data:{items} } = await request('/channels', {
+         params: {
+            part: 'contentDetails',
+            id:id
+         },
+      })
+
+      const uploadPlaylistID = items[0].contentDetails.relatedPlaylists.uploads
+      
+      //get the videos using the id
+      const { data } = await request('/playlistItems', {
+         params: {
+            part: 'contentDetails, snippet',
+            playlistId:uploadPlaylistID,
+            maxResults:20,
+         },
+      })
+
+      dispatch({
+         type: CHANNEL_VIDEOS_SUCCESS,
+         payload: data.items,
+      })
+   } catch (error) {
+      console.log(error.response.data.message)
+      dispatch({
+         type: CHANNEL_VIDEOS_FAIL,
+         payload: error.response.data,
       })
    }
 }
