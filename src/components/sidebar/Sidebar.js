@@ -29,12 +29,8 @@ const Sidebar = ({ sidebar, handleToggleSidebar }) => {
                 </li>
             </Link>
             <li>
-                <MdThumbUp size={23}/>
-                <span>Home</span>
-            </li>
-            <li>
                 <MdHistory size={23}/>
-                <span>Histroy</span>
+                <span>History</span>
             </li>
             <hr />
             <li>
