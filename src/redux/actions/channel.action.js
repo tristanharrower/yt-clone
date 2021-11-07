@@ -54,7 +54,7 @@ export const getChannelDetails = (id) => async dispatch => {
    }
 }
 
-export const getVideosByChannel = () => async (dispatch, getState) => {
+export const getSubscribedChannels = () => async (dispatch, getState) => {
    try{
       dispatch({
          type:SUBSCRIPTIONS_CHANNEL_REQUEST

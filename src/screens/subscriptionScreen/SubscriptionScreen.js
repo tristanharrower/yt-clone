@@ -1,5 +1,5 @@
 import React from 'react'
-import {getVideosByChannel} from '../../redux/actions/channel.action'
+import {getSubscribedChannels} from '../../redux/actions/channel.action'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { Container } from 'react-bootstrap'
@@ -13,7 +13,7 @@ const SubscriptionScreen = () => {
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        dispatch(getVideosByChannel());
+        dispatch(getSubscribedChannels());
     }, [dispatch])
 
     const {videos, loading} = useSelector(state => state.subscriptionsChannel)
