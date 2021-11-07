@@ -23,7 +23,7 @@ const SubscriptionScreen = () => {
              <Container fluid>
             {
                 !loading ? (
-                    videos?.map(video=><VideoVertical video={video} key={video.id} />)
+                    videos?.map(video=><VideoVertical video={video} key={video.id} subScreen/>)
                 ) : <h1>Loading...</h1>
             }
 
