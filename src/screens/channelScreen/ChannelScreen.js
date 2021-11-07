@@ -1,8 +1,13 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getVideosByChannel } from '../../redux/actions/videos.action'
 import { useParams } from 'react-router'
+import { Col, Container, Row } from 'react-bootstrap'
+import Video from '../../components/video/Video'
+import { getChannelDetails } from '../../redux/actions/channel.action'
+import numeral from 'numeral'
+import './_channelScreen.scss'
 
 const ChannelScreen = () => {
 
@@ -12,12 +17,48 @@ const ChannelScreen = () => {
 
     useEffect(()=>{
         dispatch(getVideosByChannel(channelId));
+        dispatch(getChannelDetails(channelId))
     }, [dispatch, channelId])
 
+
+    const {videos, loading} = useSelector(state=>state.channelVideos)
+    const {snippet, statistics} = useSelector(state=>state.channelDetails.channel)
+
+
     return (
-        <div>
-            Channel Screen
-        </div>
+    <>
+    <div className='px-5 py-2 my-2 d-flex justify-content-between align-items-center channelHeader'>
+            <div className='d-flex align-items-center'>
+               <img src={snippet?.thumbnails?.default?.url} alt='' />
+
+               <div className='ml-3 channelHeader__details'>
+                  <h3>{snippet?.title}</h3>
+                  <span>
+                     {numeral(statistics?.subscriberCount).format('0.a')}{' '}
+                     subscribers
+                  </span>
+               </div>
+            </div>
+
+            <button>Subscribe</button>
+         </div>
+
+        <Container>
+            <Row className="mt-2">
+            {
+                !loading ? videos?.map(video=>
+                <Col md={4} lg={3}>
+                    <Video video={video} channelScreen/>
+                </Col>) 
+                : <h1>loading..</h1>
+            }
+            </Row>
+        </Container>
+
+
+
+    </>
+        
     )
 }
 
