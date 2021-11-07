@@ -10,6 +10,7 @@ import SearchScreen from './screens/SearchScreen'
 import './_app.scss'
 import { useSelector } from 'react-redux'
 import WatchScreen from './screens/watchScreen/WatchScreen'
+import SubscriptionScreen from './screens/subscriptionScreen/SubscriptionScreen'
 
 
 
@@ -68,6 +69,11 @@ const App = () => {
             <Route path='/channel/:channelId'>
                 <Layout >
                       <h1>channel screen</h1>
+                </Layout>
+            </Route>
+            <Route path='/feed/subscriptions'>
+                <Layout >
+                      <SubscriptionScreen/>
                 </Layout>
             </Route>
             <Route>

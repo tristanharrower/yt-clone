@@ -9,6 +9,7 @@ import {
     MdHome,
     MdSentimentDissatisfied,
 } from "react-icons/md"
+import { Link } from 'react-router-dom'
 
 const Sidebar = ({ sidebar, handleToggleSidebar }) => {
 
@@ -21,10 +22,12 @@ const Sidebar = ({ sidebar, handleToggleSidebar }) => {
                 <MdHome size={23}/>
                 <span>Home</span>
             </li>
-            <li>
-                <MdSubscriptions size={23}/>
-                <span>Subscriptions</span>
-            </li>
+            <Link to ="/feed/subscriptions" className="subscriptions">
+                <li>
+                    <MdSubscriptions size={23}/>
+                    <span>Subscriptions</span>
+                </li>
+            </Link>
             <li>
                 <MdThumbUp size={23}/>
                 <span>Home</span>

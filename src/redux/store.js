@@ -9,6 +9,7 @@ import { commentListReducer } from './reducers/comments.reducer'
 import { homeVideosReducer, relatedVideoReducer } from './reducers/videos.reducer'
 import { selectedVideoReducer } from './reducers/videos.reducer'
 import { searchedVideosReducer } from './reducers/videos.reducer'
+import { subscriptionsChannelReducer } from './reducers/videos.reducer'
 
 
 
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     channelDetails:channelDetailsReducer,
     commentList:commentListReducer,
     relatedVideos:relatedVideoReducer,
-    searchedVideos: searchedVideosReducer
+    searchedVideos: searchedVideosReducer,
+    subscriptionsChannel: subscriptionsChannelReducer
 })
 
 const store = createStore(
