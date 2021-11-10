@@ -2,7 +2,7 @@ import firebase from 'firebase/compat/app'
 
 import auth from '../../firebase'
 
-import { LOAD_PROFILE, LOGIN_FAIL, LOGIN_OUT, LOGIN_REQUEST, LOGIN_SUCCESS, } from '../actionType'
+import { LOAD_PROFILE, LOGIN_FAIL, LOG_OUT, LOGIN_REQUEST, LOGIN_SUCCESS, } from '../actionType'
 
 
 
@@ -49,7 +49,7 @@ export const login = () => async dispatch => {
 export const log_out = () => async dispatch => {
     await auth.signOut()
     dispatch({
-        type:LOGIN_OUT,
+        type:LOG_OUT,
     })
 
     sessionStorage.removeItem('ytc-access-token')
