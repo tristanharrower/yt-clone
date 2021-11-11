@@ -13,7 +13,6 @@ import request from '../../api';
 import { useHistory } from 'react-router';
 
 const VideoVertical = ({ video, searchScreen, subScreen }) => {
-  
 
     const {
         id,
@@ -32,10 +31,9 @@ const VideoVertical = ({ video, searchScreen, subScreen }) => {
      const [duration, setDuration] = useState(null)
      const [channelIcon, setChannelIcon] = useState(null)
      const isVideo = !(id.kind === 'youtube#channel' || subScreen)
+     const _id = id.videoId || id
 
-     
 
-     
     useEffect(() => {
 
         const get_video_details = async () => {
@@ -45,19 +43,18 @@ const VideoVertical = ({ video, searchScreen, subScreen }) => {
             } = await request('/videos', {
                 params:{
                     part:'contentDetails,statistics',
-                    id:id.videoId,
+                    id:_id,
                 }
             })
             setDuration(items[0].contentDetails.duration)
             setViews(items[0].statistics.viewCount)
             
         }
-    if(isVideo){
-        get_video_details()
-    }
-
+        if (isVideo){
+            get_video_details()
+        }
         
-    }, [id, isVideo])
+    }, [_id, isVideo])
 
     useEffect(() => {
 
@@ -89,7 +86,7 @@ const VideoVertical = ({ video, searchScreen, subScreen }) => {
     const history = useHistory()
     const handleClick = () => {
         isVideo
-        ? history.push(`/watch/${id.videoId}`)
+        ? history.push(`/watch/${_id}`)
         : history.push(`/channel/${_channelId}`)
     }
 

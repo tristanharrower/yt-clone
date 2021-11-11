@@ -3,7 +3,7 @@ import { LOAD_PROFILE, LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOG_OUT } from 
 
 const initialState = {
     accessToken: sessionStorage.getItem("ytc-access-token") ? sessionStorage.getItem("ytc-access-token"):null,
-    user:sessionStorage.getItem("ytc-user") ? JSON.stringify(sessionStorage.getItem("ytc-user")) :null,
+    user:sessionStorage.getItem("ytc-user") ? JSON.parse(sessionStorage.getItem("ytc-user")) :null,
     loading:false,
 }
 

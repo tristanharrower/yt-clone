@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import WatchScreen from './screens/watchScreen/WatchScreen'
 import SubscriptionScreen from './screens/subscriptionScreen/SubscriptionScreen'
 import ChannelScreen from './screens/channelScreen/ChannelScreen'
+import LikedVideoScreen from './screens/LikedVideoScreen'
 
 
 
@@ -56,6 +57,11 @@ const App = () => {
             </Route>
             <Route path='/auth'>
                     <LoginScreen />
+            </Route> 
+            <Route path='/likedVideos'>
+                <Layout >
+                    <LikedVideoScreen />
+                </Layout>
             </Route> 
             <Route path='/search/:query'>
                 <Layout >

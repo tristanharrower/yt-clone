@@ -42,8 +42,13 @@ const Sidebar = ({ sidebar, handleToggleSidebar }) => {
                     <span>Subscriptions</span>
                 </li>
             </Link>
+            <Link to ="/likedVideos" >
+                <li>
+                    <MdThumbUp size={23} />
+                    <span>Liked Videos</span>
+                </li>
+            </Link>
             <hr />
-
             <li onClick={handleLogOut}>
                 <MdExitToApp size={23}/>
                 <span>Log Out</span>

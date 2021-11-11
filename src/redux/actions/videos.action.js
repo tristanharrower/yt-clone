@@ -5,6 +5,9 @@ import {
     HOME_VIDEOS_FAIL,
     HOME_VIDEOS_REQUEST,
     HOME_VIDEOS_SUCCESS,
+    LIKED_VIDEOS_FAIL,
+    LIKED_VIDEOS_REQUEST,
+    LIKED_VIDEOS_SUCCESS,
     RELATED_VIDEO_FAIL,
     RELATED_VIDEO_REQUEST,
     RELATED_VIDEO_SUCCESS,
@@ -17,6 +20,8 @@ import {
  } from '../actionType'
  
  import request from '../../api'
+
+ import data1 from '../../server'
  
  export const getPopularVideos = () => async (dispatch, getState) => {
     try {
@@ -196,5 +201,34 @@ export const getVideosByChannel = (id) => async (dispatch) => {
          type: CHANNEL_VIDEOS_FAIL,
          payload: error.response.data,
       })
+   }
+}
+
+export const getLikedVideos = () => async (dispatch, getState) => {
+   try{
+      dispatch({
+         type:LIKED_VIDEOS_REQUEST
+      })
+      const {data}  =  await request('/videos',{
+         params:{
+            part:'snippet,contentDetails,statistics',
+            myRating:'like'
+         },
+         headers:{
+            Authorization:`Bearer ${getState().auth.accessToken}`
+         }
+      })
+      
+      dispatch({
+         type:LIKED_VIDEOS_SUCCESS,
+         payload:data.items
+      })
+      
+   }  catch(error){
+        console.log(error.response.data);
+        dispatch({
+           type:LIKED_VIDEOS_FAIL,
+           payload: error.message
+        })
    }
 }
