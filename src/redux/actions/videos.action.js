@@ -20,8 +20,6 @@ import {
  } from '../actionType'
  
  import request from '../../api'
-
- import data1 from '../../server'
  
  export const getPopularVideos = () => async (dispatch, getState) => {
     try {
